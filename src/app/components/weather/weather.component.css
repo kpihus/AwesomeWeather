@@ -1,0 +1,18 @@
+.weather-container{
+  display: grid;
+  grid-template-rows: 19% 14% 7% 30% 30%;
+  height: 100%;
+}
+
+.w-item{
+  border: 1px solid;
+  color: black;
+}
+
+.forecast{
+  display: flex;
+}
+
+.forecast app-weather-item{
+  flex: 1;
+}

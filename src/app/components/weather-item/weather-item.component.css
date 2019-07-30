@@ -1,0 +1,19 @@
+.day-container{
+  display: grid;
+  color: #516570;
+  grid-template-rows: 25% 50% 25%;
+  height: 100%;
+}
+.w-day{
+  text-align: center;
+  vertical-align: bottom;
+}
+.w-icon{
+  text-align: center;
+
+  font-size: 40pt;
+}
+.w-temp{
+  text-align: center;
+  background-color: yellow;
+}

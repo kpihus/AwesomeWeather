@@ -1,31 +1,22 @@
 # AwesomeWeather
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
+## Acceptance criteria:
+- Application should provide 7-day (or less if there are any API restrictions) forecast starting from today;
+- City can be selected by name or current geo-coordinates can be used;
+- In the list temperature should be shown for a daytime, icons should be neutral;
+- In the section "Current weather" the temperature and icon depend on the current time;
+- According to changes in control "Scale's type" (C or F) convert temperature from Celsius to Fahrenheit or vice versa;
+- If page was reloaded then application should restore state (if any city was selected by name or coordinates, it should be shown saved forecast, but in background, app should ask about new data);
+- Make it responsive (suggest your option for mobile)
+- The result should be available in a Git repository (on Github or Bitbucket for example)
+- We don't have strong requirements about JS frameworks, but we're using Angular in our project, would be nice to use it for test assignment;
+- CSS frameworks shouldn't be used for this test assignment. Preferably use a CSS preprocessor (Stylus, Sass, etc…)
+- It should work as single page application. Although this specific task can be done in a more simple way, it is important that you use some package manager and other tools (like task runners or JS transpilers and CSS preprocessors) 
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Before you start:
+- font family – Roboto;
+- you can use this API http://openweathermap.org/api   
+ or any other, or create mock API on your own;
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to GitHub Pages
-
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- weather icons available here https://erikflowers.github.io/weather-icons/ 
+- other icons – https://material.io/icons/   
