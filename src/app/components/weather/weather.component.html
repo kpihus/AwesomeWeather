@@ -1,11 +1,24 @@
 <div class="weather-container">
-  <div class="w-item"><i class="wi wi-day-sunny"></i></div>
-  <div class="w-item">2</div>
-  <div class="w-item">3</div>
-  <div class="w-item">4</div>
+  <div class="w-item header">
+    <div class="back_btn"><i class="material-icons">arrow_back</i></div>
+    <div class="location">{{location}}</div>
+    <div class="settings" (click)="onToggleSettings()">
+      &#176;C
+      <i class="material-icons" *ngIf="unit === 'C'">toggle_off</i>
+      <i class="material-icons" *ngIf="unit === 'F'">toggle_on</i>
+      &#176;F
+    </div>
+  </div>
+  <div class="w-item date">{{current.day}}</div>
+  <div class="w-item description">{{current.description}}</div>
+  <div class="w-item current">
+    <div class="temp">{{current.temp}}&#176;{{unit}}</div>
+    <div class="icon"><i [ngClass]="['wi', current.icon]"></i></div>
+    <div></div>
+  </div>
+
   <div class="w-item forecast">
-    <app-weather-item *ngFor="let day of forecast" [day]="day">
-      <p>{{day.day}}</p>
+    <app-weather-item *ngFor="let day of forecast" [day]="day" [unit] = "unit">
     </app-weather-item>
   </div>
 </div>

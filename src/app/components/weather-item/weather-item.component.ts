@@ -8,19 +8,11 @@ import {Weather} from '../../models/Weather'
 })
 export class WeatherItemComponent implements OnInit {
   @Input() day: Weather;
+  @Input() unit:string;
 
   constructor() {
   }
 
   ngOnInit() {
   }
-
-  // setWeatherIcon(){
-  //   console.log('ICON');
-  //   let classes = {
-  //     wi: true,
-  //     'wi-day-sunny': true
-  //   };
-  //   return classes;
-  // }
 }
