@@ -1,58 +1,41 @@
 export interface ApiWeatherForecast {
-  cod: string;
-  message: number;
-  cnt: number;
-  list?: (ListEntity)[] | null;
-  city: City;
+  Headline: Headline;
+  DailyForecasts?: (DailyForecastsEntity)[] | null;
 }
-export interface ListEntity {
-  dt: number;
-  main: Main;
-  weather?: (WeatherEntity)[] | null;
-  clouds: Clouds;
-  wind: Wind;
-  rain?: Rain | null;
-  sys: Sys;
-  dt_txt: string;
+export interface Headline {
+  EffectiveDate: string;
+  EffectiveEpochDate: number;
+  Severity: number;
+  Text: string;
+  Category: string;
+  EndDate: string;
+  EndEpochDate: number;
+  MobileLink: string;
+  Link: string;
 }
-export interface Main {
-  temp: number;
-  temp_min: number;
-  temp_max: number;
-  pressure: number;
-  sea_level: number;
-  grnd_level: number;
-  humidity: number;
-  temp_kf: number;
+export interface DailyForecastsEntity {
+  Date: string;
+  EpochDate: number;
+  Temperature: Temperature;
+  Day: DayOrNight;
+  Night: DayOrNight;
+  Sources?: (string)[] | null;
+  MobileLink: string;
+  Link: string;
 }
-export interface WeatherEntity {
-  id: number;
-  main: string;
-  description: string;
-  icon: string;
+export interface Temperature {
+  Minimum: MinimumOrMaximum;
+  Maximum: MinimumOrMaximum;
 }
-export interface Clouds {
-  all: number;
+export interface MinimumOrMaximum {
+  Value: number;
+  Unit: string;
+  UnitType: number;
 }
-export interface Wind {
-  speed: number;
-  deg: number;
-}
-export interface Rain {
-  '3h?': number | null;
-}
-export interface Sys {
-  pod: string;
-}
-export interface City {
-  id: number;
-  name: string;
-  coord: Coord;
-  country: string;
-  population: number;
-  timezone: number;
-}
-export interface Coord {
-  lat: number;
-  lon: number;
+export interface DayOrNight {
+  Icon: number;
+  IconPhrase: string;
+  HasPrecipitation: boolean;
+  PrecipitationType?: string | null;
+  PrecipitationIntensity?: string | null;
 }

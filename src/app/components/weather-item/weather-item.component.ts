@@ -4,7 +4,7 @@ import {Weather} from '../../models/Weather'
 @Component({
   selector: 'app-weather-item',
   templateUrl: './weather-item.component.html',
-  styleUrls: ['./weather-item.component.css']
+  styleUrls: ['./weather-item.component.sass']
 })
 export class WeatherItemComponent implements OnInit {
   @Input() day: Weather;

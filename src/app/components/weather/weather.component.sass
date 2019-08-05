@@ -1,0 +1,53 @@
+.weather-container
+  display: grid
+  grid-template-rows: 19% 14% 7% 30% 30%
+  height: 100%
+  align-items: center
+
+  .header
+    display: grid
+    grid-template-columns: 10% 70% 20%
+
+  .location, .settings
+    font-size: 2em
+    font-weight: bold
+    line-height: 100%
+
+  .date, .description
+    padding-left: 50px
+
+  .current
+    display: grid
+    grid-template-columns: 25% 25% 50%
+    color: #e49682
+    text-align: center
+    padding-left: 50px
+    .icon, .temp
+      font-size: 7em
+
+  .day_forecast
+    height: 100%
+    display: grid
+    font-size: 20pt
+    grid-template-columns: 33% 66%
+    grid-template-rows: 25% 25% 25% 25%
+    align-items: start
+    div
+      text-align: start
+    div:nth-child(odd)
+      grid-column: 1
+    div:nth-child(even)
+      grid-column: 2
+
+  .date
+    font-size: 200%
+
+  .description
+    font-size: 150%
+    text-transform: capitalize
+
+  .forecast
+    display: flex
+    height: 100%
+    app-weather-item
+      flex: 1
