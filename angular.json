@@ -21,10 +21,9 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.sass`",
+              "src/styles.sass",
               "src/assets/css/weather-icons.min.css",
-              "src/assets/css/material-icons.css",
-              "src/assets/css/roboto.css"
+              "src/assets/css/material-icons.css"
             ],
             "scripts": []
           },

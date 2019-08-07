@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Weather} from '../../models/Weather'
-import {WeatherService} from '../../services/weather.service';
+import {CommunicationService} from '../../services/communication.service';
 import {WeatherDayforecast} from "../../models/weather-dayforecast";
+import {Location} from "../../models/location";
+import {LocalStorageService} from "../../services/local-storage.service";
 
 @Component({
   selector: 'app-weather',
@@ -12,21 +14,22 @@ export class WeatherComponent implements OnInit {
   forecast: Weather[];
   current: Weather;
   dayForecast: WeatherDayforecast[];
-  location: string = '130271';
+  location:Location = {name: null, key:null};
   unit: string = 'C';
 
-  constructor(private weatherService: WeatherService) {
+  constructor(private weatherService:CommunicationService, private storage:LocalStorageService) {
   }
 
 
   ngOnInit() {
-    this.weatherService.getCurrent(this.location).subscribe(current => {
+    this.location = this.storage.getLocation();
+    this.weatherService.getCurrent(this.location.key).subscribe(current => {
       this.current = current;
     });
-    this.weatherService.getForecast(this.location).subscribe(forecast => {
+    this.weatherService.getForecast(this.location.key).subscribe(forecast => {
       this.forecast = forecast
     });
-    this.weatherService.getDayForecast(this.location).subscribe(forecast => {
+    this.weatherService.getDayForecast(this.location.key).subscribe(forecast => {
       this.dayForecast = forecast;
     })
   }

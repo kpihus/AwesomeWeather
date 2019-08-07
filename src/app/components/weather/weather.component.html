@@ -1,7 +1,9 @@
 <div class="weather-container">
   <div class="header">
-    <div class="back_btn"><i class="material-icons">arrow_back</i></div>
-    <div class="location">{{location}}</div>
+    <div class="back_btn">
+      <a routerLink="/location"><i class="material-icons">arrow_back</i></a>
+    </div>
+    <div class="location">{{location.name}}</div>
     <div class="settings" (click)="onToggleSettings()">
       <i class="wi wi-celsius"></i>
       <i class="material-icons" *ngIf="unit === 'C'">toggle_off</i>

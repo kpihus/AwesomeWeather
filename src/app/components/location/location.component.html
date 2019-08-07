@@ -1,0 +1,20 @@
+<div class="location-container">
+  <div class="search-results">
+    <input [value]="location.name" placeholder="City"
+           ngxTypeahead
+           [taUrl]="url"
+           [taParams]="params"
+           [taApi]="'http'"
+           [taItemTpl]="itemTpl"
+           (taSelected)="handleResultSelected($event)"
+    ><i class="material-icons">search</i>
+    <ng-template #itemTpl let-result>
+      <div>{{result.result.LocalizedName}}, {{result.result.Country.ID}}</div>
+    </ng-template>
+  </div>
+
+  <div class="browser-location">
+    <div>or</div>
+    use my <span class="my-location" (click)="useBrowserLocation()">current position</span>
+  </div>
+</div>

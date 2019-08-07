@@ -6,16 +6,14 @@ import {ApiWeatherCurrent} from "../models/ApiWeatherCurrent";
 import {ApiWeatherHistory} from "../models/apiweather-history";
 import {ApiWeatherForecast12} from "../models/apiweather-forecast12h";
 import {WeatherDayforecast} from "../models/weather-dayforecast";
+import {ApiLocation} from "../models/apiLocation";
 import {Weather} from "../models/Weather";
 import * as moment from "moment";
 
 @Injectable()
-export class WeatherService {
-  // http://dataservice.accuweather.com/currentconditions/v1/130271?apikey=Tb2PwtJCMcWhOHUMwBdzeSTGkGTa8boj
-  // http://dataservice.accuweather.com/forecasts/v1/daily/5day/130271?apikey=Tb2PwtJCMcWhOHUMwBdzeSTGkGTa8boj&metric=true
+export class CommunicationService {
   weatherUrl: string = 'http://dataservice.accuweather.com';
   apiKey: string = 'Tb2PwtJCMcWhOHUMwBdzeSTGkGTa8boj';
-  units: string = 'metric';
 
   constructor(private http: HttpClient) {
   }
@@ -25,9 +23,9 @@ export class WeatherService {
       1: 'wi-day-sunny',
       2: 'wi-day-sunny',
       3: 'wi-day-sunny',
-      4: 'w-day-cloudy',
-      5: 'w-day-cloudy',
-      6: 'w-day-cloudy',
+      4: 'wi-day-cloudy',
+      5: 'wi-day-cloudy',
+      6: 'wi-day-cloudy',
       7: 'wi-cloud',
       8: 'wi-cloudy',
       11: 'wi-fog',
@@ -74,7 +72,7 @@ export class WeatherService {
           const forecast = data.DailyForecasts.map((df: DailyForecastsEntity) => {
             return {
               day: moment(df.Date).format('dddd'),
-              icon: WeatherService.mapIcon(df.Day.Icon),
+              icon: CommunicationService.mapIcon(df.Day.Icon),
               temp: Math.round(df.Temperature.Maximum.Value)
             }
           });
@@ -91,7 +89,7 @@ export class WeatherService {
           const data = {
             day: moment(weather[0].LocalObservationDateTime).format('dddd, MMMM Do YYYY'),
             temp: Math.round(weather[0].Temperature.Metric.Value),
-            icon: WeatherService.mapIcon(weather[0].WeatherIcon),
+            icon: CommunicationService.mapIcon(weather[0].WeatherIcon),
             description: weather[0].WeatherText
           };
           observer.next(data);
@@ -125,12 +123,16 @@ export class WeatherService {
 
           const data:WeatherDayforecast[] = mappedHistorical
             .concat(mappedForecast)
-            .filter(WeatherService.filterOutImportantDatapoints)
-            .sort(WeatherService.sortDatapointsByTime);
+            .filter(CommunicationService.filterOutImportantDatapoints)
+            .sort(CommunicationService.sortDatapointsByTime);
 
           observer.next(data);
         })
     })
+  }
+  // http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=Tb2PwtJCMcWhOHUMwBdzeSTGkGTa8boj&q=58.9286477,24.8853814&toplevel=true
+  getLocationByGeopos(position):Observable<ApiLocation>{
+    return this.http.get<ApiLocation>(`${this.weatherUrl}/locations/v1/cities/geoposition/search?apikey=Tb2PwtJCMcWhOHUMwBdzeSTGkGTa8boj&q=${position.lat},${position.lon}`)
   }
 
   //Helper functions
