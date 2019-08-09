@@ -4,17 +4,20 @@ import {LocalStorageService} from "../../services/local-storage.service";
 import {Router} from "@angular/router";
 import {CommunicationService} from "../../services/communication.service";
 import {ApiLocation} from "../../models/apiLocation";
+import {ViewEncapsulation} from "@angular/core";
+import {environment} from "../../../environments/environment";
 
 
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
-  styleUrls: ['./location.component.sass']
+  styleUrls: ['./location.component.sass'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LocationComponent implements OnInit {
   public url = '//dataservice.accuweather.com/locations/v1/cities/autocomplete';
   public params = {
-    apikey: 'Tb2PwtJCMcWhOHUMwBdzeSTGkGTa8boj',
+    apikey: environment.apikey,
   };
   public location:Location = {name: '', key: null};
 
@@ -26,7 +29,7 @@ export class LocationComponent implements OnInit {
 
   handleResultSelected(result) {
     this.location = {
-      name: `${result.LocalizedName}, ${result.Country.ID}`,
+      name: `${result.LocalizedName}, ${result.Country.LocalizedName}`,
       key: result.Key
     };
     this.storage.setLocation(this.location);

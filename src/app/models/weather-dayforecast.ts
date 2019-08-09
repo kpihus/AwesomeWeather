@@ -1,4 +1,5 @@
 export interface WeatherDayforecast {
   dateTime:string,
-  temp:number
+  temp:number,
+  dayTime?: string
 }

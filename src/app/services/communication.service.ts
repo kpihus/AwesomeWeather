@@ -9,11 +9,12 @@ import {WeatherDayforecast} from "../models/weather-dayforecast";
 import {ApiLocation} from "../models/apiLocation";
 import {Weather} from "../models/Weather";
 import * as moment from "moment";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class CommunicationService {
   weatherUrl: string = 'http://dataservice.accuweather.com';
-  apiKey: string = 'Tb2PwtJCMcWhOHUMwBdzeSTGkGTa8boj';
+  apiKey: string = environment.apikey;
 
   constructor(private http: HttpClient) {
   }
@@ -124,15 +125,17 @@ export class CommunicationService {
           const data:WeatherDayforecast[] = mappedHistorical
             .concat(mappedForecast)
             .filter(CommunicationService.filterOutImportantDatapoints)
-            .sort(CommunicationService.sortDatapointsByTime);
+            .sort(CommunicationService.sortDatapointsByTime)
+            .map(d => {
+              return Object.assign(d, {dayTime: CommunicationService.formatDaytime(d.dateTime)});
+            });
 
           observer.next(data);
         })
     })
   }
-  // http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=Tb2PwtJCMcWhOHUMwBdzeSTGkGTa8boj&q=58.9286477,24.8853814&toplevel=true
   getLocationByGeopos(position):Observable<ApiLocation>{
-    return this.http.get<ApiLocation>(`${this.weatherUrl}/locations/v1/cities/geoposition/search?apikey=Tb2PwtJCMcWhOHUMwBdzeSTGkGTa8boj&q=${position.lat},${position.lon}`)
+    return this.http.get<ApiLocation>(`${this.weatherUrl}/locations/v1/cities/geoposition/search?apikey=${this.apiKey}&q=${position.lat},${position.lon}`)
   }
 
   //Helper functions
@@ -154,5 +157,19 @@ export class CommunicationService {
       return 1
     }
     return 0;
+  }
+
+  static formatDaytime(timeString:string):string{
+    const hour = moment(timeString).format('HH');
+    switch (hour) {
+      case '06':
+        return 'Morning';
+      case '12':
+        return 'Day';
+      case '18':
+        return 'Evening';
+      case '00':
+        return 'Night';
+    }
   }
 }

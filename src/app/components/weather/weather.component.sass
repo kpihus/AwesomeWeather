@@ -1,30 +1,29 @@
 .weather-container
   display: grid
-  grid-template-rows: 19% 14% 7% 30% 30%
   height: 100%
   align-items: center
 
   .header
     display: grid
-    grid-template-columns: 15% 65% 20%
-  .back_btn
-    padding-left: 50px
+    grid-template-columns: 15% 55% 30%
 
   .location, .settings
     font-size: 2em
     line-height: 100%
     font-weight: 400
+  .location
     padding-top: 10px
 
-  .date, .description
-    padding-left: 50px
+  .settings
+    text-align: right
+    padding-right: 20px
+    .wi
+      font-size: 40pt
 
   .current
     display: grid
-    grid-template-columns: 25% 25% 50%
     color: #e49682
     text-align: center
-    padding-left: 50px
     .icon, .temp
       font-size: 7em
 
@@ -32,15 +31,14 @@
     height: 100%
     display: grid
     font-size: 20pt
-    grid-template-columns: 33% 66%
+    //grid-template-columns: 33% 66%
     grid-template-rows: 25% 25% 25% 25%
     align-items: start
+    .daytime
+      width: 170px
     div
       text-align: start
-    div:nth-child(odd)
-      grid-column: 1
-    div:nth-child(even)
-      grid-column: 2
+      display: inline-block
 
   .date
     font-size: 200%
@@ -54,3 +52,29 @@
     height: 100%
     app-weather-item
       flex: 1
+
+@media (min-width: 1001px)
+  .weather-container
+    grid-template-rows: 19% 14% 7% 30% 30%
+    .current
+      padding-left: 50px
+      grid-template-columns: 25% 25% 50%
+    .date, .description, .back_btn
+      padding-left: 50px
+
+@media (max-width: 1000px)
+  .weather-container
+    grid-template-rows: 10% 14% 7% 39% 30%
+    .current
+      grid-template-rows: repeat(3, auto)
+      grid-template-columns: repeat(2, auto)
+      padding-left: 5px
+    .date, .description, .back_btn
+      padding-left: 5px
+
+@media (max-width: 699px)
+  .weather-container
+    grid-template-rows: 14% 10% 5% 51% 20%
+    .current
+      grid-template-rows: repeat(3, auto)
+      grid-template-columns: auto

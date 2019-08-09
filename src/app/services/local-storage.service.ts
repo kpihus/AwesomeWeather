@@ -1,6 +1,8 @@
 import {Inject, Injectable} from '@angular/core';
 import { LOCAL_STORAGE, StorageService} from "ngx-webstorage-service";
 import {Location} from "../models/location";
+import {Weather} from "../models/Weather";
+import {WeatherDayforecast} from "../models/weather-dayforecast";
 
 const STORAGE_PREFIX = 'awesome-weather';
 
@@ -15,16 +17,32 @@ export class LocalStorageService {
     return `${STORAGE_PREFIX}_${type}`
   }
 
-  public setLocation(location: Location){
+  setLocation(location: Location):void{
     this.storage.set(LocalStorageService.getKey('location'), JSON.stringify(location))
   }
 
-  public getLocation():Location{
-    const result = this.storage.get(LocalStorageService.getKey('location'));
+  getLocation():Location{
+    const data = this.storage.get(LocalStorageService.getKey('location'));
+    if(!data){
+      return {name: null, key: null}
+    }
     try {
-      return JSON.parse(result)
+      return JSON.parse(data)
     } catch (e) {
-      console.error('Unable to parse stored location item')
+      console.error('Unable to parse stored location item');
+    }
+  }
+
+  setWeather(data:Weather|Weather[]|WeatherDayforecast[], type:string):void{
+    this.storage.set(LocalStorageService.getKey(type), JSON.stringify(data));
+  }
+
+  getWeather(type:string){
+    const data = this.storage.get(LocalStorageService.getKey(type));
+    try {
+      return JSON.parse(data);
+    } catch (e) {
+      console.error('Unable to parse stored weather data');
     }
   }
 }

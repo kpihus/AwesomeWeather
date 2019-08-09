@@ -1,8 +1,5 @@
-
 .container-box
   display: grid
-  grid-template-columns: auto 1000px  auto
-  grid-template-rows: auto 581px auto
   width: 100vw
   height: 100vh
 
@@ -17,6 +14,21 @@
   .row5
     grid-column-start: 1
     grid-column-end: 4
+
+@media (min-width: 1001px)
+  .container-box
+    grid-template-columns: auto 1000px  auto
+    grid-template-rows: auto 579px auto
+
+@media (max-width: 1000px)
+  .container-box
+    grid-template-columns: auto 700px  auto
+    grid-template-rows: auto 700px auto
+
+@media (max-width: 699px)
+  .container-box
+    grid-template-columns: auto 500px  auto
+    grid-template-rows: auto 800px auto
 
 
 
